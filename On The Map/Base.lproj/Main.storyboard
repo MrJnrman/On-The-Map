@@ -46,7 +46,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="n9n-rz-gqJ" kind="show" id="LtA-0m-tr6"/>
+                                            <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cUn-qy-lF5"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Sc-hD-ez4">
@@ -73,6 +73,10 @@
                             <constraint firstItem="LZp-lx-DHH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ogN-BD-X6b"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="WTS-dJ-PkR" id="AjJ-IB-rBY"/>
+                        <outlet property="passwordTextField" destination="M1B-Xz-Cha" id="TRt-5M-BZA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

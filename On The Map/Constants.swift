@@ -20,8 +20,9 @@ struct ParseConstants {
 }
 
 struct UdacityConstants {
-    static let ApiHost = "www.udacity.com/api"
-    static let AuthorizationURL = "www.udacity.com/api/session"
+    static let ApiHost = "www.udacity.com"
+    static let ApiPath = "/api"
+    static let SessionPath = "/session"
 }
 
 struct Methods {
