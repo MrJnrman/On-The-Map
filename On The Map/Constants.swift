@@ -8,6 +8,11 @@
 
 import Foundation
 
+struct ResponseCodes {
+    static let Ok = "200"
+    static let BadCredentials = "403"
+}
+
 struct Scheme {
     static let ApiScheme = "https"
 }
@@ -40,6 +45,22 @@ struct HTTPMethods {
 
 struct HttpBody {
     static let AuthorizationBody = "{\"udacity\": {\"username\": \"<user-name>\", \"password\": \"<password>\"}}"
+}
+
+struct AlertViewConstants {
+    static let Title = "Oops!"
+    static let TryAgain = "Try Again"
+    static let LoginError = "Error Loggin In"
+    static let Request403 = "Invalid Credentials"
+    static let MissingCredentials = "Missing Credentials"
+    static let Ok = "Ok"
+}
+
+struct JSONResponseKeys {
+    static let Account = "account"
+    static let AccountKey = "key"
+    static let Session = "session"
+    static let SessionId = "id"
 }
 
 enum API {

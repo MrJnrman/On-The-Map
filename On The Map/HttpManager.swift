@@ -65,7 +65,6 @@ class HttpManager {
         let task = session.dataTask(with: addMethodAndHeaders(request, method: HTTPMethods.POST, api: api)) { (data, response, error) in
             
             func sendError(_ error: String) {
-                print(error)
                 let userInfo = [NSLocalizedDescriptionKey : error]
                 completionHandlerForPOST(nil, NSError(domain: "taskForPOSTMethod", code: 1, userInfo: userInfo))
             }
@@ -77,7 +76,7 @@ class HttpManager {
             }
             
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                sendError("Your request returned a status code other than 2xx!")
+                sendError("\((response as? HTTPURLResponse)!.statusCode)")
                 return
             }
             

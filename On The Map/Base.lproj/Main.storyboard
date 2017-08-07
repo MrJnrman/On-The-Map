@@ -76,6 +76,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="WTS-dJ-PkR" id="AjJ-IB-rBY"/>
                         <outlet property="passwordTextField" destination="M1B-Xz-Cha" id="TRt-5M-BZA"/>
+                        <segue destination="n9n-rz-gqJ" kind="show" identifier="LoginSegue" id="ER1-qQ-EYg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -85,7 +86,7 @@
         <!--Item 2-->
         <scene sceneID="eWa-yJ-Zjb">
             <objects>
-                <viewController id="LEd-IS-phC" sceneMemberID="viewController">
+                <viewController id="LEd-IS-phC" customClass="ListViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uka-gc-AIn"/>
                         <viewControllerLayoutGuide type="bottom" id="VTO-4T-ofH"/>
@@ -111,7 +112,11 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pcl-or-QOk">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
-                                    <barButtonItem title="Logout" width="67" id="O3s-T1-WKL"/>
+                                    <barButtonItem title="Logout" width="67" id="O3s-T1-WKL">
+                                        <connections>
+                                            <action selector="logoutButtonPressed:" destination="LEd-IS-phC" id="cDs-IN-eJL"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title="On The Map" width="140" id="cXH-dh-wYa"/>
                                     <barButtonItem systemItem="refresh" id="gvf-xe-X1v"/>
                                     <barButtonItem systemItem="add" id="mMQ-6k-O3F">
@@ -205,7 +210,7 @@
         <!--Item-->
         <scene sceneID="DTR-FI-qV6">
             <objects>
-                <viewController id="rAJ-O2-vyf" sceneMemberID="viewController">
+                <viewController id="rAJ-O2-vyf" customClass="MapViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="arp-2H-Hb7"/>
                         <viewControllerLayoutGuide type="bottom" id="DTj-5O-Qut"/>
@@ -217,7 +222,11 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ukE-Lb-icr">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
-                                    <barButtonItem title="Logout" width="67" id="ih3-EN-Yyu"/>
+                                    <barButtonItem title="Logout" width="67" id="ih3-EN-Yyu">
+                                        <connections>
+                                            <action selector="logoutButtonPressed:" destination="rAJ-O2-vyf" id="h1L-k3-Lb3"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title="On The Map" width="140" id="dnF-Ga-KiZ"/>
                                     <barButtonItem systemItem="refresh" id="TjF-QO-j8C"/>
                                     <barButtonItem systemItem="add" id="cc4-AQ-1aa">
@@ -266,6 +275,6 @@
         <image name="placeholder" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gyl-6y-e4b"/>
+        <segue reference="bYd-Ai-FQm"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -1,5 +1,5 @@
 //
-//  SessionID.swift
+//  GCDBlackBox.swift
 //  On The Map
 //
 //  Created by Jamel Reid  on 8/7/17.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct SessionID {
-    static let shared = SessionID()
-    
-    var sessionID: String?
+func performUIUpdatesOnMain(_ updates: @escaping () -> Void) {
+    DispatchQueue.main.async {
+        updates()
+    }
 }
