@@ -15,6 +15,7 @@
 		EB1413DF1F38A7FF00A5E2CD /* On_The_MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1413DE1F38A7FF00A5E2CD /* On_The_MapTests.swift */; };
 		EB1413EA1F38A7FF00A5E2CD /* On_The_MapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1413E91F38A7FF00A5E2CD /* On_The_MapUITests.swift */; };
 		EB1413FB1F38B6A900A5E2CD /* LoginUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1413FA1F38B6A900A5E2CD /* LoginUIButton.swift */; };
+		EB1413FF1F38C44C00A5E2CD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1413FE1F38C44C00A5E2CD /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		EB1413E91F38A7FF00A5E2CD /* On_The_MapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = On_The_MapUITests.swift; sourceTree = "<group>"; };
 		EB1413EB1F38A7FF00A5E2CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB1413FA1F38B6A900A5E2CD /* LoginUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUIButton.swift; sourceTree = "<group>"; };
+		EB1413FE1F38C44C00A5E2CD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,14 +101,12 @@
 		EB1413C81F38A7FF00A5E2CD /* On The Map */ = {
 			isa = PBXGroup;
 			children = (
+				EB1413C91F38A7FF00A5E2CD /* AppDelegate.swift */,
+				EB1414011F38C47300A5E2CD /* Supporting Files */,
+				EB1414001F38C45600A5E2CD /* Assets */,
 				EB1413F91F38B66000A5E2CD /* Controller */,
 				EB1413F81F38B65B00A5E2CD /* View */,
 				EB1413F71F38B64E00A5E2CD /* Model */,
-				EB1413C91F38A7FF00A5E2CD /* AppDelegate.swift */,
-				EB1413CD1F38A7FF00A5E2CD /* Main.storyboard */,
-				EB1413D01F38A7FF00A5E2CD /* Assets.xcassets */,
-				EB1413D21F38A7FF00A5E2CD /* LaunchScreen.storyboard */,
-				EB1413D51F38A7FF00A5E2CD /* Info.plist */,
 			);
 			path = "On The Map";
 			sourceTree = "<group>";
@@ -132,6 +132,7 @@
 		EB1413F71F38B64E00A5E2CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EB1413FE1F38C44C00A5E2CD /* Constants.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -150,6 +151,24 @@
 				EB1413CB1F38A7FF00A5E2CD /* LoginViewController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		EB1414001F38C45600A5E2CD /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				EB1413D21F38A7FF00A5E2CD /* LaunchScreen.storyboard */,
+				EB1413D01F38A7FF00A5E2CD /* Assets.xcassets */,
+				EB1413CD1F38A7FF00A5E2CD /* Main.storyboard */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		EB1414011F38C47300A5E2CD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EB1413D51F38A7FF00A5E2CD /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +311,7 @@
 				EB1413CC1F38A7FF00A5E2CD /* LoginViewController.swift in Sources */,
 				EB1413CA1F38A7FF00A5E2CD /* AppDelegate.swift in Sources */,
 				EB1413FB1F38B6A900A5E2CD /* LoginUIButton.swift in Sources */,
+				EB1413FF1F38C44C00A5E2CD /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
