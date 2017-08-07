@@ -16,6 +16,8 @@
 		EB1413EA1F38A7FF00A5E2CD /* On_The_MapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1413E91F38A7FF00A5E2CD /* On_The_MapUITests.swift */; };
 		EB1413FB1F38B6A900A5E2CD /* LoginUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1413FA1F38B6A900A5E2CD /* LoginUIButton.swift */; };
 		EB1413FF1F38C44C00A5E2CD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1413FE1F38C44C00A5E2CD /* Constants.swift */; };
+		EB1414031F38D75000A5E2CD /* SessionID.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1414021F38D75000A5E2CD /* SessionID.swift */; };
+		EB1414061F38D7E700A5E2CD /* HttpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1414051F38D7E700A5E2CD /* HttpManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		EB1413EB1F38A7FF00A5E2CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB1413FA1F38B6A900A5E2CD /* LoginUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUIButton.swift; sourceTree = "<group>"; };
 		EB1413FE1F38C44C00A5E2CD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EB1414021F38D75000A5E2CD /* SessionID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionID.swift; sourceTree = "<group>"; };
+		EB1414051F38D7E700A5E2CD /* HttpManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,7 @@
 		EB1413C81F38A7FF00A5E2CD /* On The Map */ = {
 			isa = PBXGroup;
 			children = (
+				EB1414041F38D7B900A5E2CD /* Networking */,
 				EB1413C91F38A7FF00A5E2CD /* AppDelegate.swift */,
 				EB1414011F38C47300A5E2CD /* Supporting Files */,
 				EB1414001F38C45600A5E2CD /* Assets */,
@@ -133,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				EB1413FE1F38C44C00A5E2CD /* Constants.swift */,
+				EB1414021F38D75000A5E2CD /* SessionID.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -169,6 +175,14 @@
 				EB1413D51F38A7FF00A5E2CD /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EB1414041F38D7B900A5E2CD /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				EB1414051F38D7E700A5E2CD /* HttpManager.swift */,
+			);
+			name = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,8 +322,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB1414031F38D75000A5E2CD /* SessionID.swift in Sources */,
 				EB1413CC1F38A7FF00A5E2CD /* LoginViewController.swift in Sources */,
 				EB1413CA1F38A7FF00A5E2CD /* AppDelegate.swift in Sources */,
+				EB1414061F38D7E700A5E2CD /* HttpManager.swift in Sources */,
 				EB1413FB1F38B6A900A5E2CD /* LoginUIButton.swift in Sources */,
 				EB1413FF1F38C44C00A5E2CD /* Constants.swift in Sources */,
 			);
