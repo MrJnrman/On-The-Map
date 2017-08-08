@@ -12,12 +12,31 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
 
     @IBAction func loginButtonPressed(_ sender: Any) {
         login()
     }
     
+    func showActivityIndicator() {
+        self.activityIndicator.center = self.view.center
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(self.activityIndicator)
+        
+        self.activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    func hideActivityIndicator() {
+        self.activityIndicator.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
+    }
+    
     func login() {
+        
+        self.showActivityIndicator()
         
         guard (emailTextField.text != ""), (passwordTextField.text != "") else {
             showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.MissingCredentials, buttonText: AlertViewConstants.Ok)
@@ -34,6 +53,7 @@ class LoginViewController: UIViewController {
                 performUIUpdatesOnMain {
                     print(error!.localizedDescription)
                     if error!.localizedDescription == ResponseCodes.BadCredentials {
+                        self.hideActivityIndicator()
                         self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.Request403, buttonText:AlertViewConstants.TryAgain)
                     }
                 }
@@ -42,9 +62,12 @@ class LoginViewController: UIViewController {
                     self.getPublicData(Account.shared.userId!) { (username) in
                         performUIUpdatesOnMain {
                             guard (username != nil) else {
+                                self.hideActivityIndicator()
                                 self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.Request403, buttonText: AlertViewConstants.TryAgain)
                                 return
                             }
+                            
+                            self.hideActivityIndicator()
                             
                             // add username to Account struct and transition to enxt view
                             Account.shared.username = username
@@ -53,6 +76,7 @@ class LoginViewController: UIViewController {
                     }
                 } else {
                     performUIUpdatesOnMain {
+                        self.hideActivityIndicator()
                         self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.LoginError, buttonText: AlertViewConstants.TryAgain)
                     }
                 }
