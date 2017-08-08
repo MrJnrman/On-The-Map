@@ -48,5 +48,10 @@ extension ListViewController: UITableViewDataSource {
 }
 
 extension ListViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let app = UIApplication.shared
+        if let toOpen = StudentLocation.shared.studentLocations[indexPath.row].mediaURL {
+            app.open(URL(string: toOpen)!)
+        }
+    }
 }
