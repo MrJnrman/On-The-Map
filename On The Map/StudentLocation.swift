@@ -16,6 +16,7 @@ struct StudentLocation {
     var mediaURL: String!
     var latitude: Double!
     var longitude: Double!
+    var studentLocations = [StudentLocation]()
     
     init() {
         
@@ -30,9 +31,7 @@ struct StudentLocation {
         
     }
     
-    func build(_ results: AnyObject) -> [StudentLocation] {
-        
-        var studentLocations = [StudentLocation]()
+    mutating func build(_ results: AnyObject) -> [StudentLocation] {
         
         for dictionary in results[JSONResponseKeys.Results] as! [[String:AnyObject]] {
             
@@ -50,10 +49,14 @@ struct StudentLocation {
             
             let studentLocation = StudentLocation(dictionary)
             
-            studentLocations.append(studentLocation)
+            self.studentLocations.append(studentLocation)
         }
         
         return studentLocations
 
+    }
+    
+    func getName() -> String {
+        return "\(self.firstName!) \(self.lastName!)"
     }
 }

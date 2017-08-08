@@ -22,6 +22,7 @@
 		EB14140A1F3932AA00A5E2CD /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1414091F3932AA00A5E2CD /* MapViewController.swift */; };
 		EB14140C1F3932C900A5E2CD /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14140B1F3932C900A5E2CD /* ListViewController.swift */; };
 		EB14140E1F3A22E000A5E2CD /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14140D1F3A22E000A5E2CD /* StudentLocation.swift */; };
+		EB1414101F3A5B3F00A5E2CD /* StudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14140F1F3A5B3F00A5E2CD /* StudentTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		EB1414091F3932AA00A5E2CD /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		EB14140B1F3932C900A5E2CD /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		EB14140D1F3A22E000A5E2CD /* StudentLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
+		EB14140F1F3A5B3F00A5E2CD /* StudentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				EB1413FA1F38B6A900A5E2CD /* LoginUIButton.swift */,
+				EB14140F1F3A5B3F00A5E2CD /* StudentTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				EB1413FF1F38C44C00A5E2CD /* Constants.swift in Sources */,
 				EB1414081F392B5100A5E2CD /* GCDBlackBox.swift in Sources */,
 				EB14140E1F3A22E000A5E2CD /* StudentLocation.swift in Sources */,
+				EB1414101F3A5B3F00A5E2CD /* StudentTableViewCell.swift in Sources */,
 				EB14140A1F3932AA00A5E2CD /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
