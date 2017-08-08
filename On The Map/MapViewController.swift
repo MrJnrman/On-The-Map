@@ -14,10 +14,27 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     let annotation = MKPointAnnotation()
     
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         getStudentLocations()
+    }
+    
+    func showActivityIndicator() {
+        self.activityIndicator.center = self.view.center
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(self.activityIndicator)
+        
+        self.activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    func hideActivityIndicator() {
+        self.activityIndicator.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
     }
     
     @IBAction func logoutButtonPressed(_ sender: Any) {
@@ -27,12 +44,16 @@ class MapViewController: UIViewController {
     }
     
     func getStudentLocations() {
+        
+        self.showActivityIndicator()
+        
         let parameters = [
             ParameterKeys.Limit: ParameterValues.Limit,
             ParameterKeys.Order: ParameterValues.Descending
         ]
         _ = HttpManager.shared.taskForGETRequest(Methods.ParseStudentLocation, parameters: parameters as [String:AnyObject], api: .parse) { (results,error) in
             performUIUpdatesOnMain {
+                self.hideActivityIndicator()
                 if error == nil {
                     self.loadMap(results!)
                 } else {
@@ -68,18 +89,18 @@ class MapViewController: UIViewController {
     
         let locationCoordinates = self.mapView.convert(location, toCoordinateFrom: self.mapView)
         
-        showPinDropAlert() { (website) in
+        showPinDropAlert() { (websiteURL) in
             
             // TODO: Update the parse api with new pin info
             performUIUpdatesOnMain {
                 
-                guard let website = website else {
+                guard let websiteURL = websiteURL else {
                     return
                 }
                 
                 self.annotation.coordinate = locationCoordinates
                 self.annotation.title = Account.shared.username
-                self.annotation.subtitle = website
+                self.annotation.subtitle = websiteURL
                 
                 self.mapView.addAnnotation(self.annotation)
             }
