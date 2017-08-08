@@ -83,7 +83,7 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>
-        <!--Item 2-->
+        <!--List View Controller-->
         <scene sceneID="eWa-yJ-Zjb">
             <objects>
                 <viewController id="LEd-IS-phC" customClass="ListViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
@@ -138,7 +138,7 @@
                             <constraint firstItem="pcl-or-QOk" firstAttribute="leading" secondItem="q4l-5f-vHZ" secondAttribute="leading" id="n3R-da-4KX"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="Q60-9h-xjb"/>
+                    <tabBarItem key="tabBarItem" title="" image="table_30x30" id="Q60-9h-xjb"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c2f-cc-WZY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -207,7 +207,7 @@
             </objects>
             <point key="canvasLocation" x="4050" y="138"/>
         </scene>
-        <!--Item-->
+        <!--Map View Controller-->
         <scene sceneID="DTR-FI-qV6">
             <objects>
                 <viewController id="rAJ-O2-vyf" customClass="MapViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
@@ -255,7 +255,7 @@
                             <constraint firstItem="EPa-Vb-BTp" firstAttribute="top" secondItem="ukE-Lb-icr" secondAttribute="bottom" id="f6C-d6-plx"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="CS4-nS-XZn"/>
+                    <tabBarItem key="tabBarItem" title="" image="pin" id="CS4-nS-XZn"/>
                     <connections>
                         <outlet property="mapView" destination="EPa-Vb-BTp" id="xKd-B9-caH"/>
                     </connections>
@@ -291,9 +291,11 @@
     </scenes>
     <resources>
         <image name="map" width="64" height="64"/>
+        <image name="pin" width="32" height="32"/>
         <image name="placeholder" width="128" height="128"/>
+        <image name="table_30x30" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gyl-6y-e4b"/>
+        <segue reference="bYd-Ai-FQm"/>
     </inferredMetricsTieBreakers>
 </document>
