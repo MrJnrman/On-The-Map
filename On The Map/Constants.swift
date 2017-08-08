@@ -56,6 +56,7 @@ struct AlertViewConstants {
     static let Ok = "Ok"
     static let PinCancel = "Cancel"
     static let PinSave = "Save"
+    static let RequestTimedOut = "Request Timed Out"
 }
 
 struct JSONResponseKeys {

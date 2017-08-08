@@ -39,6 +39,7 @@ class LoginViewController: UIViewController {
         self.showActivityIndicator()
         
         guard (emailTextField.text != ""), (passwordTextField.text != "") else {
+            self.hideActivityIndicator()
             showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.MissingCredentials, buttonText: AlertViewConstants.Ok)
             return
         }
@@ -55,6 +56,11 @@ class LoginViewController: UIViewController {
                     if error!.localizedDescription == ResponseCodes.BadCredentials {
                         self.hideActivityIndicator()
                         self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.Request403, buttonText:AlertViewConstants.TryAgain)
+                    }
+                    
+                    if error!.code == NSURLErrorTimedOut {
+                        self.hideActivityIndicator()
+                        self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.RequestTimedOut, buttonText: AlertViewConstants.Ok)
                     }
                 }
             } else {
@@ -89,7 +95,7 @@ class LoginViewController: UIViewController {
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        let action = UIAlertAction(title: title, style: .destructive, handler: nil)
+        let action = UIAlertAction(title: buttonText, style: .destructive, handler: nil)
         alertController.addAction(action)
 
         self.present(alertController, animated: true, completion: nil)
