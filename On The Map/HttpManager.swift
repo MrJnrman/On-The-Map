@@ -18,18 +18,14 @@ class HttpManager {
         
         var reqeust = NSMutableURLRequest(url: urlWithParameters(parameters, withPathExtension: method, using: api))
         
-        print(reqeust)
-        
         let task = session.dataTask(with: addMethodAndHeaders(reqeust, method: HTTPMethods.GET, api: api)) { (data, response, error) in
             
             func sendError(_ error: String) {
-                print(error)
                 let userInfo = [NSLocalizedDescriptionKey : error]
                 completionHandlerForGET(nil, NSError(domain: "taskForGETMethod", code: 1, userInfo: userInfo))
             }
             
             guard (error == nil) else {
-                print(error)
                 completionHandlerForGET(nil, error! as NSError)
                 return
             }
@@ -41,11 +37,9 @@ class HttpManager {
             
             /* GUARD: Was there any data returned? */
             guard let data = data else {
-                print("No data was returned by the request!")
+                sendError("No data was returned by the request!")
                 return
             }
-            
-            print(data)
             
             self.convertDataWithCompletionHandler(data, completionHandlerForConvertData: completionHandlerForGET)
         }
@@ -60,8 +54,6 @@ class HttpManager {
         var request = NSMutableURLRequest(url: urlWithParameters(parameters, withPathExtension: method, using: api))
         request.httpBody = jsonBody.data(using: String.Encoding.utf8)
         
-        print("URL: \(request.url)")
-        
         let task = session.dataTask(with: addMethodAndHeaders(request, method: HTTPMethods.POST, api: api)) { (data, response, error) in
             
             func sendError(_ error: String) {
@@ -70,7 +62,6 @@ class HttpManager {
             }
             
             guard (error == nil) else {
-                print(error)
                 completionHandlerForPOST(nil, error! as NSError)
                 return
             }
@@ -82,7 +73,7 @@ class HttpManager {
             
             /* GUARD: Was there any data returned? */
             guard let data = data else {
-                print("No data was returned by the request!")
+                sendError("No data was returned by the request!")
                 return
             }
             

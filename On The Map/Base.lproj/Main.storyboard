@@ -236,15 +236,25 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EPa-Vb-BTp">
+                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="EPa-Vb-BTp" firstAttribute="leading" secondItem="ukE-Lb-icr" secondAttribute="leading" id="2v8-Jg-gZS"/>
                             <constraint firstItem="ukE-Lb-icr" firstAttribute="top" secondItem="8aP-37-hA4" secondAttribute="top" id="EBF-2U-nxQ"/>
                             <constraint firstAttribute="trailing" secondItem="ukE-Lb-icr" secondAttribute="trailing" id="I5C-pV-Fom"/>
+                            <constraint firstItem="EPa-Vb-BTp" firstAttribute="trailing" secondItem="ukE-Lb-icr" secondAttribute="trailing" id="LEd-rg-Ff4"/>
                             <constraint firstItem="ukE-Lb-icr" firstAttribute="leading" secondItem="8aP-37-hA4" secondAttribute="leading" id="Xqp-4t-deN"/>
+                            <constraint firstItem="EPa-Vb-BTp" firstAttribute="bottom" secondItem="DTj-5O-Qut" secondAttribute="top" id="dqE-3s-DfN"/>
+                            <constraint firstItem="EPa-Vb-BTp" firstAttribute="top" secondItem="ukE-Lb-icr" secondAttribute="bottom" id="f6C-d6-plx"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="CS4-nS-XZn"/>
+                    <connections>
+                        <outlet property="mapView" destination="EPa-Vb-BTp" id="xKd-B9-caH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rDj-hB-yHC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -275,6 +285,6 @@
         <image name="placeholder" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bYd-Ai-FQm"/>
+        <segue reference="gyl-6y-e4b"/>
     </inferredMetricsTieBreakers>
 </document>

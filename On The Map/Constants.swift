@@ -61,6 +61,18 @@ struct JSONResponseKeys {
     static let AccountKey = "key"
     static let Session = "session"
     static let SessionId = "id"
+    static let Results = "results"
+}
+
+struct ParameterKeys {
+    static let Limit = "limit"
+    static let Order = "order"
+}
+
+struct ParameterValues {
+    static let Limit = "100"
+    static let Ascending = "updatedAt"
+    static let Descending = "-updatedAt"
 }
 
 enum API {
