@@ -28,7 +28,7 @@ class MapViewController: UIViewController {
     func getStudentLocations() {
         let parameters = [
             ParameterKeys.Limit: ParameterValues.Limit,
-            ParameterKeys.Order: ParameterValues.Descendig
+            ParameterKeys.Order: ParameterValues.Descending
         ]
         _ = HttpManager.shared.taskForGETRequest(Methods.ParseStudentLocation, parameters: parameters as [String:AnyObject], api: .parse) { (results,error) in
             performUIUpdatesOnMain {
