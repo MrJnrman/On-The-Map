@@ -13,4 +13,5 @@ struct Account {
     
     var sessionID: String?
     var userId: String?
+    var username: String?
 }

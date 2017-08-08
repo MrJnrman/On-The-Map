@@ -238,6 +238,10 @@
                             </toolbar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EPa-Vb-BTp">
                                 <rect key="frame" x="0.0" y="44" width="320" height="475"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="MVh-OS-OiB" appends="YES" id="QC3-G9-zDP"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -257,6 +261,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rDj-hB-yHC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="MVh-OS-OiB">
+                    <connections>
+                        <action selector="dropPin:" destination="rAJ-O2-vyf" id="Rp0-HW-Qga"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2825.625" y="-228.16901408450704"/>
         </scene>

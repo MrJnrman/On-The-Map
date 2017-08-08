@@ -30,20 +30,33 @@ class LoginViewController: UIViewController {
         
         _ = HttpManager.shared.taskForPOSTRequest(UdacityConstants.SessionPath, parameters: nil, api: API.udacity, jsonBody: jsonBody) { (results,error) in
             
-            performUIUpdatesOnMain {
-                if error != nil {
+            if error != nil {
+                performUIUpdatesOnMain {
                     print(error!.localizedDescription)
                     if error!.localizedDescription == ResponseCodes.BadCredentials {
-                        self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.Request403, buttonText: AlertViewConstants.TryAgain)
+                        self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.Request403, buttonText:AlertViewConstants.TryAgain)
+                    }
+                }
+            } else {
+                if self.getLoginData(results!) {
+                    self.getPublicData(Account.shared.userId!) { (username) in
+                        performUIUpdatesOnMain {
+                            guard (username != nil) else {
+                                self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.Request403, buttonText: AlertViewConstants.TryAgain)
+                                return
+                            }
+                            
+                            // add username to Account struct and transition to enxt view
+                            Account.shared.username = username
+                            self.performSegue(withIdentifier: "LoginSegue", sender: nil)
+                        }
                     }
                 } else {
-                    if self.getLoginData(results!) {
-                        self.performSegue(withIdentifier: "LoginSegue", sender: nil)
-                    } else {
+                    performUIUpdatesOnMain {
                         self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.LoginError, buttonText: AlertViewConstants.TryAgain)
                     }
-                    
                 }
+                    
             }
         }
     }
@@ -80,6 +93,30 @@ class LoginViewController: UIViewController {
         Account.shared.userId = accountId
         
         return success
+    }
+    
+    func getPublicData(_ accountId: String, completionHandler: @escaping (_ username: String?) -> Void) {
+        
+        let method = Methods.UdacityUser.replacingOccurrences(of: "<user_id>", with: accountId)
+        
+        _ = HttpManager.shared.taskForGETRequest(method, parameters: nil, api: .udacity) { (results,error) in
+//            print(results)
+            guard let user = results?[JSONResponseKeys.User] as? [String:AnyObject] else {
+                completionHandler(nil)
+                return
+            }
+            guard let firstName = user[JSONResponseKeys.FirstName] as? String else {
+                completionHandler(nil)
+                return
+            }
+            
+            guard let lastName = user[JSONResponseKeys.LastName] as? String else {
+                completionHandler(nil)
+                return
+            }
+            
+            completionHandler("\(firstName) \(lastName)")
+        }
     }
 }
 

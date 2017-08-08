@@ -62,6 +62,9 @@ struct JSONResponseKeys {
     static let Session = "session"
     static let SessionId = "id"
     static let Results = "results"
+    static let FirstName = "first_name"
+    static let LastName = "last_name"
+    static let User = "user"
 }
 
 struct ParameterKeys {

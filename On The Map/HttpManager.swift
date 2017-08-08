@@ -16,9 +16,10 @@ class HttpManager {
     
     func taskForGETRequest(_ method: String, parameters: [String:AnyObject]?, api: API, completionHandlerForGET: @escaping (_ result: AnyObject? , _ error: NSError? ) -> Void) -> URLSessionTask {
         
-        var reqeust = NSMutableURLRequest(url: urlWithParameters(parameters, withPathExtension: method, using: api))
+        var request = NSMutableURLRequest(url: urlWithParameters(parameters, withPathExtension: method, using: api))
         
-        let task = session.dataTask(with: addMethodAndHeaders(reqeust, method: HTTPMethods.GET, api: api)) { (data, response, error) in
+        
+        let task = session.dataTask(with: addMethodAndHeaders(request, method: HTTPMethods.GET, api: api)) { (data, response, error) in
             
             func sendError(_ error: String) {
                 let userInfo = [NSLocalizedDescriptionKey : error]
@@ -41,7 +42,13 @@ class HttpManager {
                 return
             }
             
-            self.convertDataWithCompletionHandler(data, completionHandlerForConvertData: completionHandlerForGET)
+            if api == API.udacity {
+                let range = Range(5..<data.count)
+                let newData = data.subdata(in: range)
+                self.convertDataWithCompletionHandler(newData, completionHandlerForConvertData: completionHandlerForGET)
+            } else {
+                self.convertDataWithCompletionHandler(data, completionHandlerForConvertData: completionHandlerForGET)
+            }
         }
         
         task.resume()

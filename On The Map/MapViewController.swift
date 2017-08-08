@@ -12,6 +12,7 @@ import MapKit
 class MapViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
+    let annotation = MKPointAnnotation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +73,54 @@ class MapViewController: UIViewController {
         }
         
         self.mapView.addAnnotations(annotations)
+    }
+    
+    @IBAction func dropPin(_ sender: UILongPressGestureRecognizer) {
+        
+        let location = sender.location(in: self.mapView)
+    
+        let locationCoordinates = self.mapView.convert(location, toCoordinateFrom: self.mapView)
+        
+        showPinDropAlert() { (website) in
+            
+            // TODO: Update the parse api with new pin info
+            performUIUpdatesOnMain {
+                
+                guard let website = website else {
+                    return
+                }
+                
+                self.annotation.coordinate = locationCoordinates
+                self.annotation.title = Account.shared.username
+                self.annotation.subtitle = website
+                
+                self.mapView.addAnnotation(self.annotation)
+            }
+        }
+        
+        
+    }
+    
+    func showPinDropAlert(completionHandler: @escaping (_ website: String?) -> Void) {
+        let pinAlertController = UIAlertController(title: "Website", message: "Input your personal website.", preferredStyle: .alert)
+    
+        pinAlertController.addAction(UIAlertAction(title: "Save", style: .default) { (alert) in
+            let websiteTextField = pinAlertController.textFields![0] as UITextField
+            
+            if websiteTextField.text != "" {
+                completionHandler(websiteTextField.text)
+            } else {
+                completionHandler(nil)
+            }
+        })
+        
+        pinAlertController.addTextField() { (textField) in
+            textField.placeholder = "Website"
+            textField.textAlignment = .left
+        }
+        
+        self.present(pinAlertController, animated: true, completion: nil)
+    
     }
     
 }
