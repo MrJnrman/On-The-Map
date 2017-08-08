@@ -46,27 +46,14 @@ class MapViewController: UIViewController {
         
         var annotations = [MKPointAnnotation]()
         
+        let studentLocations = StudentLocation.shared.build(results)
         
-        
-        for dictionary in results[JSONResponseKeys.Results] as! [[String:AnyObject]] {
-            guard let lat = dictionary["latitude"], let long = dictionary["longitude"] else {
-                continue
-            }
-
-            let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(lat as! Double), longitude: CLLocationDegrees(long as! Double))
-            
-            guard let first = dictionary["firstName"] as? String, let last = dictionary["lastName"] as? String else {
-                continue
-            }
-            
-            guard let mediaURL = dictionary["mediaURL"] as? String else{
-                continue
-            }
+        for studentLocation in studentLocations {
             
             let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = "\(first) \(last)"
-            annotation.subtitle = mediaURL
+            annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(studentLocation.latitude), longitude: CLLocationDegrees(studentLocation.longitude))
+            annotation.title = "\(studentLocation.firstName!) \(studentLocation.lastName!)"
+            annotation.subtitle = studentLocation.mediaURL
             
             
             annotations.append(annotation)
@@ -104,7 +91,7 @@ class MapViewController: UIViewController {
     func showPinDropAlert(completionHandler: @escaping (_ website: String?) -> Void) {
         let pinAlertController = UIAlertController(title: "Website", message: "Input your personal website.", preferredStyle: .alert)
     
-        pinAlertController.addAction(UIAlertAction(title: "Save", style: .default) { (alert) in
+        pinAlertController.addAction(UIAlertAction(title: AlertViewConstants.PinSave, style: .default) { (alert) in
             let websiteTextField = pinAlertController.textFields![0] as UITextField
             
             if websiteTextField.text != "" {
@@ -112,6 +99,10 @@ class MapViewController: UIViewController {
             } else {
                 completionHandler(nil)
             }
+        })
+        
+        pinAlertController.addAction(UIAlertAction(title: AlertViewConstants.PinCancel, style: .default) { (alert) in
+            completionHandler(nil)
         })
         
         pinAlertController.addTextField() { (textField) in
@@ -144,7 +135,7 @@ extension MapViewController: MKMapViewDelegate {
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
-            pinView!.pinColor = .purple
+            pinView!.pinTintColor = .purple
             pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         else {

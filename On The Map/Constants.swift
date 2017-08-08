@@ -54,6 +54,8 @@ struct AlertViewConstants {
     static let Request403 = "Invalid Credentials"
     static let MissingCredentials = "Missing Credentials"
     static let Ok = "Ok"
+    static let PinCancel = "Cancel"
+    static let PinSave = "Save"
 }
 
 struct JSONResponseKeys {
