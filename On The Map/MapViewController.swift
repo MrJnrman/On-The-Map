@@ -24,6 +24,10 @@ class MapViewController: UIViewController {
         getStudentLocations()
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     func showActivityIndicator() {
         self.activityIndicator.center = self.view.center
         self.activityIndicator.hidesWhenStopped = true
@@ -133,13 +137,16 @@ class MapViewController: UIViewController {
     }
     
     func postNewLocation(mediaURL: String, lat: Double, long: Double, completionHandler: @escaping (_ success: Bool) -> Void ) {
+        self.showActivityIndicator()
         
         let jsonBody = buildJSONBody(mediaURL: mediaURL, lat: lat, long: long)
         let _ = HttpManager.shared.taskForPOSTRequest(Methods.ParseStudentLocation, parameters: nil, api: .parse, jsonBody: jsonBody) { (results,error) in
             
             if error == nil {
-                 completionHandler(true)
+                self.hideActivityIndicator()
+                completionHandler(true)
             } else {
+                self.hideActivityIndicator()
                 completionHandler(false)
             }
         }
@@ -170,6 +177,11 @@ class MapViewController: UIViewController {
         self.present(pinAlertController, animated: true, completion: nil)
     
     }
+    
+    @IBAction func refreshPressed(_ sender: Any) {
+        getStudentLocations()
+    }
+    
     
 }
 

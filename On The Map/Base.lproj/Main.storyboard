@@ -133,8 +133,8 @@
                                             <action selector="logoutButtonPressed:" destination="LEd-IS-phC" id="cDs-IN-eJL"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="On The Map" width="140" id="cXH-dh-wYa"/>
-                                    <barButtonItem systemItem="refresh" id="gvf-xe-X1v"/>
+                                    <barButtonItem enabled="NO" title="On The Map" width="136" id="cXH-dh-wYa"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="eXS-1R-J3Y"/>
                                     <barButtonItem systemItem="add" id="mMQ-6k-O3F">
                                         <connections>
                                             <segue destination="1lS-vz-W1M" kind="show" id="bYd-Ai-FQm"/>
@@ -161,7 +161,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c2f-cc-WZY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2825.625" y="467.95774647887322"/>
+            <point key="canvasLocation" x="2826" y="467"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="x6C-pT-dbE">
@@ -229,7 +229,7 @@
         <!--Map View Controller-->
         <scene sceneID="DTR-FI-qV6">
             <objects>
-                <viewController id="rAJ-O2-vyf" customClass="MapViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" id="rAJ-O2-vyf" customClass="MapViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="arp-2H-Hb7"/>
                         <viewControllerLayoutGuide type="bottom" id="DTj-5O-Qut"/>
@@ -246,8 +246,13 @@
                                             <action selector="logoutButtonPressed:" destination="rAJ-O2-vyf" id="h1L-k3-Lb3"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="On The Map" width="140" id="dnF-Ga-KiZ"/>
-                                    <barButtonItem systemItem="refresh" id="TjF-QO-j8C"/>
+                                    <barButtonItem enabled="NO" title="On The Map" width="134" id="dnF-Ga-KiZ"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="iIz-PX-tPL"/>
+                                    <barButtonItem systemItem="refresh" id="TjF-QO-j8C">
+                                        <connections>
+                                            <action selector="refreshPressed:" destination="rAJ-O2-vyf" id="hXW-rf-3mx"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem systemItem="add" id="cc4-AQ-1aa">
                                         <connections>
                                             <segue destination="1lS-vz-W1M" kind="show" id="gyl-6y-e4b"/>
@@ -315,6 +320,6 @@
         <image name="table_30x30" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bYd-Ai-FQm"/>
+        <segue reference="gyl-6y-e4b"/>
     </inferredMetricsTieBreakers>
 </document>

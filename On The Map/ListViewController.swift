@@ -18,6 +18,10 @@ class ListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -29,7 +33,6 @@ class ListViewController: UIViewController {
         Account.shared.userId = nil
         dismiss(animated: true, completion: nil)
     }
-    
 }
 
 
