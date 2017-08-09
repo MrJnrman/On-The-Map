@@ -59,6 +59,9 @@ struct AlertViewConstants {
     static let PinSave = "Save"
     static let RequestTimedOut = "Request Timed Out"
     static let MapError = "Unable To Download Data"
+    static let MissingInfo = "Missing Information"
+    static let Dismiss = "Dismiss"
+    static let PostError = "Unable to Post Data"
 }
 
 struct JSONResponseKeys {

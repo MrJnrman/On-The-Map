@@ -18,7 +18,7 @@ struct StudentLocation {
     var longitude: Double!
     var mapString: String?
     var uniqueKey: String!
-    var studentLocations = [StudentLocation]()
+    
     
     init() {
         
@@ -36,6 +36,8 @@ struct StudentLocation {
     }
     
     mutating func build(_ results: AnyObject) -> [StudentLocation] {
+        
+        var studentLocations = [StudentLocation]()
         
         for dictionary in results[JSONResponseKeys.Results] as! [[String:AnyObject]] {
             
@@ -57,7 +59,8 @@ struct StudentLocation {
             
             let studentLocation = StudentLocation(dictionary)
             
-            self.studentLocations.append(studentLocation)
+            
+            studentLocations.append(studentLocation)
         }
         
         return studentLocations

@@ -20,12 +20,11 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         mapView.delegate = self
-
-        getStudentLocations()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        getStudentLocations()
         self.navigationController?.navigationBar.isHidden = true
     }
     
@@ -88,6 +87,7 @@ class MapViewController: UIViewController {
         var annotations = [MKPointAnnotation]()
         
         let studentLocations = StudentLocation.shared.build(results)
+        updateAppDelegateList(studentLocations: studentLocations)
         
         for studentLocation in studentLocations {
             
@@ -101,6 +101,11 @@ class MapViewController: UIViewController {
         }
         
         self.mapView.addAnnotations(annotations)
+    }
+    
+    func updateAppDelegateList(studentLocations: [StudentLocation]) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.studentLocations = studentLocations
     }
     
     @IBAction func dropPin(_ sender: UILongPressGestureRecognizer) {

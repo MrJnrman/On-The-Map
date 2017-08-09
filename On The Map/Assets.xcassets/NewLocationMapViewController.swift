@@ -63,13 +63,22 @@ class NewLocationMapViewController: UIViewController {
                     self.mapView.addAnnotation(self.annotation)
                 } else {
                     self.hideActivityIndicator()
-                    self.dismiss(animated: true, completion: nil)
-                    self.hideActivityIndicator()
+                    self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.PostError, buttonText: AlertViewConstants.Dismiss)
                 }
                 
             }
         }
         
+    }
+    
+    func showAlertView(title: String, message: String, buttonText: String) {
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: buttonText, style: .destructive, handler: nil)
+        alertController.addAction(action)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func showActivityIndicator() {
