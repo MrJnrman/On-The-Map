@@ -28,10 +28,6 @@ class MapViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
     func showActivityIndicator() {
         self.activityIndicator.center = self.view.center
         self.activityIndicator.hidesWhenStopped = true
@@ -48,9 +44,18 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func logoutButtonPressed(_ sender: Any) {
-        Account.shared.sessionID = nil
-        Account.shared.userId = nil
-        dismiss(animated: true, completion: nil)
+        
+        _ = HttpManager.shared.taskForDELETRequest(UdacityConstants.SessionPath, api: .udacity) { (success) in
+            performUIUpdatesOnMain {
+                if success {
+                    Account.shared.sessionID = nil
+                    Account.shared.userId = nil
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.LogoutError, buttonText: AlertViewConstants.Dismiss)
+                }
+            }
+        }
     }
     
     func getStudentLocations() {
@@ -71,15 +76,6 @@ class MapViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    func showAlertView(title: String, message: String, buttonText: String) {
-        
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: buttonText, style: .destructive, handler: nil)
-        alertController.addAction(action)
-        
     }
     
     func loadMap(_ results: AnyObject) {
@@ -191,6 +187,10 @@ class MapViewController: UIViewController {
         getStudentLocations()
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     
 }
 
@@ -199,9 +199,18 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
-            if let toOpen = view.annotation?.subtitle! {
-                app.open(URL(string: toOpen)!)
+            
+            guard let toOpen = view.annotation?.subtitle! else {
+                showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.InvalidURL, buttonText: AlertViewConstants.Dismiss)
+                return
             }
+            
+            guard let url = URL(string: toOpen) else {
+                showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.InvalidURL, buttonText: AlertViewConstants.Dismiss)
+                return
+            }
+            
+            app.open(url)
         }
     }
     

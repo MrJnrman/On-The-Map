@@ -41,6 +41,7 @@ struct Methods {
 struct HTTPMethods {
     static let POST = "POST"
     static let GET = "GET"
+    static let DELETE = "DELETE"
 }
 
 struct HttpBody {
@@ -62,6 +63,9 @@ struct AlertViewConstants {
     static let MissingInfo = "Missing Information"
     static let Dismiss = "Dismiss"
     static let PostError = "Unable to Post Data"
+    static let InvalidURL = "Invalid URL"
+    static let LogoutError = "Unable To Log Out"
+    static let LocationError = "Unable To Find Location"
 }
 
 struct JSONResponseKeys {

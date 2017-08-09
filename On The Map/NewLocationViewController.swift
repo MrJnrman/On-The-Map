@@ -79,16 +79,6 @@ class NewLocationViewController: UIViewController {
         self.navigationController?.pushViewController(newPinVC, animated: true)
     }
     
-    func showAlertView(title: String, message: String, buttonText: String) {
-        
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: buttonText, style: .destructive, handler: nil)
-        alertController.addAction(action)
-        
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
     @IBAction func cancelPressed(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
@@ -97,11 +87,4 @@ class NewLocationViewController: UIViewController {
         return true
     }
     
-}
-
-extension NewLocationViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
 }

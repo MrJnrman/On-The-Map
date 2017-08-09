@@ -104,11 +104,12 @@ class LoginViewController: UIViewController {
                     if error!.localizedDescription == ResponseCodes.BadCredentials {
                         self.hideActivityIndicator()
                         self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.Request403, buttonText:AlertViewConstants.TryAgain)
-                    }
-                    
-                    if error!.code == NSURLErrorTimedOut {
+                    } else if error!.code == NSURLErrorTimedOut {
                         self.hideActivityIndicator()
                         self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.RequestTimedOut, buttonText: AlertViewConstants.Ok)
+                    } else {
+                        self.hideActivityIndicator()
+                        self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.MapError, buttonText: AlertViewConstants.Dismiss)
                     }
                 }
             } else {
@@ -138,16 +139,6 @@ class LoginViewController: UIViewController {
                     
             }
         }
-    }
-    
-    func showAlertView(title: String, message: String, buttonText: String) {
-        
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: buttonText, style: .destructive, handler: nil)
-        alertController.addAction(action)
-
-        self.present(alertController, animated: true, completion: nil)
     }
     
     func getLoginData(_ results: AnyObject) -> Bool {
@@ -196,11 +187,8 @@ class LoginViewController: UIViewController {
             completionHandler(firstName, lastName)
         }
     }
-}
-
-extension LoginViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+    
+    override var prefersStatusBarHidden: Bool {
         return true
     }
 }

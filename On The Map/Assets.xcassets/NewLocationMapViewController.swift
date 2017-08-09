@@ -12,6 +12,8 @@ import MapKit
 class NewLocationMapViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var submitButton: LoginUIButton!
+    
     let annotation = MKPointAnnotation()
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
@@ -23,18 +25,30 @@ class NewLocationMapViewController: UIViewController {
         super.viewDidLoad()
         
         mapView.delegate = self
+        self.submitButton.isHidden = false
         
         let geoCoder = CLGeocoder()
+        
+        showActivityIndicator()
+        
         geoCoder.geocodeAddressString(self.location) { (placemarks, error) -> Void in
             
+            self.hideActivityIndicator()
             if error == nil {
                 if placemarks!.count != 0 {
                     self.annotation.coordinate = (placemarks?[0].location?.coordinate)!
                     self.annotation.title = Account.shared.getFullName()
                     self.annotation.subtitle = self.website
                     self.mapView.addAnnotation(self.annotation)
-                    self.mapView.selectAnnotation(self.annotation, animated: true)
+                    
+                    let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+                    let region = MKCoordinateRegion(center: self.annotation.coordinate, span: span)
+                    self.mapView.setRegion(region, animated: true)
+                    
                 }
+            } else {
+                self.submitButton.isHidden = true
+                self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.LocationError, buttonText: AlertViewConstants.Dismiss)
             }
         }
     }
@@ -69,16 +83,6 @@ class NewLocationMapViewController: UIViewController {
             }
         }
         
-    }
-    
-    func showAlertView(title: String, message: String, buttonText: String) {
-        
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: buttonText, style: .destructive, handler: nil)
-        alertController.addAction(action)
-        
-        self.present(alertController, animated: true, completion: nil)
     }
     
     func showActivityIndicator() {

@@ -267,6 +267,7 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="SYk-Ox-G8P" id="5YS-Bh-7He"/>
+                        <outlet property="submitButton" destination="BSp-gW-dhM" id="YR8-up-oKz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dmC-F7-Jfm" userLabel="First Responder" sceneMemberID="firstResponder"/>

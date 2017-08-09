@@ -100,6 +100,46 @@ class HttpManager {
         return task
     }
     
+    func taskForDELETRequest(_ method: String, api: API, completionHandlerForDELETE: @escaping (_ success: Bool) -> Void) -> URLSessionTask {
+        let request = NSMutableURLRequest(url: urlWithParameters(nil, withPathExtension: method, using: api))
+        request.httpMethod = HTTPMethods.DELETE
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        
+        let task = session.dataTask(with: addMethodAndHeaders(request, method: HTTPMethods.DELETE, api: api)) { (data, response, error) in
+            
+            guard (error == nil) else {
+                completionHandlerForDELETE(false)
+                return
+            }
+            
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                completionHandlerForDELETE(false)
+                return
+            }
+            
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                completionHandlerForDELETE(false)
+                return
+            }
+            
+            completionHandlerForDELETE(true)
+        
+        }
+        
+        task.resume()
+        
+        return task
+        
+    }
+    
     private func urlWithParameters(_ parameters: [String:AnyObject]?, withPathExtension: String? = nil, using: API) -> URL {
         
         var components = URLComponents()

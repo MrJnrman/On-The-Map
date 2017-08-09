@@ -25,6 +25,7 @@
 		EB1414101F3A5B3F00A5E2CD /* StudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14140F1F3A5B3F00A5E2CD /* StudentTableViewCell.swift */; };
 		EB1414121F3A9B8500A5E2CD /* NewLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1414111F3A9B8500A5E2CD /* NewLocationViewController.swift */; };
 		EB1414141F3A9B9500A5E2CD /* NewLocationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1414131F3A9B9500A5E2CD /* NewLocationMapViewController.swift */; };
+		EB5E0A161F3B4E7F00959750 /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5E0A151F3B4E7F00959750 /* extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		EB14140F1F3A5B3F00A5E2CD /* StudentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTableViewCell.swift; sourceTree = "<group>"; };
 		EB1414111F3A9B8500A5E2CD /* NewLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewLocationViewController.swift; sourceTree = "<group>"; };
 		EB1414131F3A9B9500A5E2CD /* NewLocationMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewLocationMapViewController.swift; path = Assets.xcassets/NewLocationMapViewController.swift; sourceTree = "<group>"; };
+		EB5E0A151F3B4E7F00959750 /* extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 		EB1413C81F38A7FF00A5E2CD /* On The Map */ = {
 			isa = PBXGroup;
 			children = (
+				EB5E0A141F3B4E4A00959750 /* Extensions */,
 				EB1413C91F38A7FF00A5E2CD /* AppDelegate.swift */,
 				EB1413F91F38B66000A5E2CD /* Controller */,
 				EB1413F81F38B65B00A5E2CD /* View */,
@@ -204,6 +207,14 @@
 				EB1414051F38D7E700A5E2CD /* HttpManager.swift */,
 			);
 			name = Networking;
+			sourceTree = "<group>";
+		};
+		EB5E0A141F3B4E4A00959750 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EB5E0A151F3B4E7F00959750 /* extension.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,6 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB1414121F3A9B8500A5E2CD /* NewLocationViewController.swift in Sources */,
+				EB5E0A161F3B4E7F00959750 /* extension.swift in Sources */,
 				EB1414031F38D75000A5E2CD /* Account.swift in Sources */,
 				EB1414141F3A9B9500A5E2CD /* NewLocationMapViewController.swift in Sources */,
 				EB1413CC1F38A7FF00A5E2CD /* LoginViewController.swift in Sources */,
@@ -608,6 +620,7 @@
 				EB1413F01F38A7FF00A5E2CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EB1413F11F38A7FF00A5E2CD /* Build configuration list for PBXNativeTarget "On The MapTests" */ = {
 			isa = XCConfigurationList;
@@ -616,6 +629,7 @@
 				EB1413F31F38A7FF00A5E2CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EB1413F41F38A7FF00A5E2CD /* Build configuration list for PBXNativeTarget "On The MapUITests" */ = {
 			isa = XCConfigurationList;
@@ -624,6 +638,7 @@
 				EB1413F61F38A7FF00A5E2CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

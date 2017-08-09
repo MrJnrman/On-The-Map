@@ -12,7 +12,7 @@ class ListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var studentLocations = [StudentLocation]()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,33 +22,40 @@ class ListViewController: UIViewController {
     }
     
     @IBAction func logoutButtonPressed(_ sender: Any) {
-        Account.shared.sessionID = nil
-        Account.shared.userId = nil
-        dismiss(animated: true, completion: nil)
+        _ = HttpManager.shared.taskForDELETRequest(UdacityConstants.SessionPath, api: .udacity) { (success) in
+            performUIUpdatesOnMain {
+                if success {
+                    Account.shared.sessionID = nil
+                    Account.shared.userId = nil
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.LogoutError, buttonText: AlertViewConstants.Dismiss)
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.studentLocations = appDelegate.studentLocations
         tableView.reloadData()
     }
     
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
 }
 
 
 extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.studentLocations.count
+        return appDelegate.studentLocations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentCell") as! StudentTableViewCell
         cell.imageView?.image = UIImage(named: "userPin")
-        cell.textLabel?.text = self.studentLocations[indexPath.row].getName()
-        cell.detailTextLabel?.text = self.studentLocations[indexPath.row].mediaURL
+        cell.textLabel?.text = appDelegate.studentLocations[indexPath.row].getName()
+        cell.detailTextLabel?.text = appDelegate.studentLocations[indexPath.row].mediaURL
         return cell
     }
 }
@@ -56,8 +63,13 @@ extension ListViewController: UITableViewDataSource {
 extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let app = UIApplication.shared
-        if let toOpen = self.studentLocations[indexPath.row].mediaURL {
-            app.open(URL(string: toOpen)!)
+        if let toOpen = appDelegate.studentLocations[indexPath.row].mediaURL {
+            guard let url = URL(string: toOpen) else {
+                showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.InvalidURL, buttonText: AlertViewConstants.Dismiss)
+                return
+            }
+            
+            app.open(url)
         }
     }
 }
