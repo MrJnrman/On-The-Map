@@ -24,6 +24,11 @@ class MapViewController: UIViewController {
         getStudentLocations()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -110,45 +115,35 @@ class MapViewController: UIViewController {
                 return
             }
             
-            self.postNewLocation(mediaURL: websiteURL, lat: Double(locationCoordinates.latitude), long: Double(locationCoordinates.longitude)) { (success) in
+            let jsonBody = StudentLocation.shared.buildJSONBody(mediaURL: websiteURL, lat: Double(locationCoordinates.latitude), long: Double(locationCoordinates.longitude))
+
+            self.showActivityIndicator()
+            HttpManager.shared.postNewLocation(jsonBody) { (success) in
                 
                 performUIUpdatesOnMain {
                     
                     if success {
+                        self.hideActivityIndicator()
                         self.annotation.coordinate = locationCoordinates
                         self.annotation.title = Account.shared.getFullName()
                         self.annotation.subtitle = websiteURL
                         
                         self.mapView.addAnnotation(self.annotation)
+                    } else {
+                        self.hideActivityIndicator()
                     }
                     
                 }
             }
-            
-            // TODO: Update the parse api with new pin info
-            
         }
         
         
     }
     
-    func buildJSONBody(mediaURL: String, lat: Double, long: Double) -> String{
-        var jsonBody = HttpBody.LocationBody
-        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.uniqueKey, with: Account.shared.userId!)
-        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.LastName, with: Account.shared.lastName!)
-        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.FirstName, with: Account.shared.firstName!)
-        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.MapString, with: "")
-        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.Latitude, with: "\(lat)")
-        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.Longitude, with: "\(long)")
-        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.MediaURL, with: mediaURL)
-        
-        return jsonBody
-    }
-    
     func postNewLocation(mediaURL: String, lat: Double, long: Double, completionHandler: @escaping (_ success: Bool) -> Void ) {
         self.showActivityIndicator()
+        let jsonBody = StudentLocation.shared.buildJSONBody(mediaURL: mediaURL, lat: lat, long: long)
         
-        let jsonBody = buildJSONBody(mediaURL: mediaURL, lat: lat, long: long)
         let _ = HttpManager.shared.taskForPOSTRequest(Methods.ParseStudentLocation, parameters: nil, api: .parse, jsonBody: jsonBody) { (results,error) in
             
             if error == nil {

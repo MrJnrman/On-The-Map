@@ -158,4 +158,15 @@ class HttpManager {
         
         return httpBody
     }
+    
+    func postNewLocation(_ jsonBody: String, completionHandler: @escaping (_ success: Bool) -> Void ) {
+        let _ = HttpManager.shared.taskForPOSTRequest(Methods.ParseStudentLocation, parameters: nil, api: .parse, jsonBody: jsonBody) { (results,error) in
+            
+            if error == nil {
+                completionHandler(true)
+            } else {
+                completionHandler(false)
+            }
+        }
+    }
 }

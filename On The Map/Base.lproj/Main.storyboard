@@ -77,12 +77,12 @@
                     <connections>
                         <outlet property="emailTextField" destination="WTS-dJ-PkR" id="AjJ-IB-rBY"/>
                         <outlet property="passwordTextField" destination="M1B-Xz-Cha" id="TRt-5M-BZA"/>
-                        <segue destination="n9n-rz-gqJ" kind="show" identifier="LoginSegue" id="ER1-qQ-EYg"/>
+                        <segue destination="JvI-Zx-bG9" kind="show" identifier="LoginSegue" id="BYo-52-ZxA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+            <point key="canvasLocation" x="-478" y="137"/>
         </scene>
         <!--List View Controller-->
         <scene sceneID="eWa-yJ-Zjb">
@@ -138,7 +138,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="eXS-1R-J3Y"/>
                                     <barButtonItem systemItem="add" id="mMQ-6k-O3F">
                                         <connections>
-                                            <segue destination="RkL-mD-cNi" kind="show" id="AYj-No-A38"/>
+                                            <segue destination="1lS-vz-W1M" kind="show" id="zXf-NY-WAi"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -164,22 +164,6 @@
             </objects>
             <point key="canvasLocation" x="2826" y="467"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="hwb-jg-EeX">
-            <objects>
-                <navigationController id="RkL-mD-cNi" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ntV-5D-4Z0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="1lS-vz-W1M" kind="relationship" relationship="rootViewController" id="nfe-aN-TeO"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2d1-So-dSp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4401" y="138"/>
-        </scene>
         <!--New Location View Controller-->
         <scene sceneID="x6C-pT-dbE">
             <objects>
@@ -195,7 +179,11 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ClR-Pz-wAq">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
-                                    <barButtonItem title="Cancel" width="64" id="aH3-ye-K6c"/>
+                                    <barButtonItem title="Cancel" width="64" id="aH3-ye-K6c">
+                                        <connections>
+                                            <action selector="cancelPressed:" destination="1lS-vz-W1M" id="nMX-nP-Gn9"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Yl1-5Z-J9g">
@@ -204,17 +192,17 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" translatesAutoresizingMaskIntoConstraints="NO" id="1dI-j8-RhZ">
                                         <rect key="frame" x="0.0" y="0.0" width="234" height="64"/>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a Location" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CpU-Cd-jZf" userLabel="Email Text Field">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a Location" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CpU-Cd-jZf" userLabel="Location Text Field">
                                         <rect key="frame" x="0.0" y="69" width="234" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a Website" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CV6-Jh-9VE" userLabel="Password Text Field">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a Website" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CV6-Jh-9VE" userLabel="Website Text Field">
                                         <rect key="frame" x="0.0" y="104" width="234" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWl-00-66A" customClass="LoginUIButton" customModule="On_The_Map" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="139" width="234" height="30"/>
@@ -222,6 +210,9 @@
                                         <state key="normal" title="FIND LOCATION">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="findLocationPressed:" destination="1lS-vz-W1M" eventType="touchUpInside" id="swz-ga-VOV"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -247,12 +238,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aZ9-z8-y6h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5685" y="138"/>
+            <point key="canvasLocation" x="4646" y="137"/>
         </scene>
         <!--New Location Map View Controller-->
         <scene sceneID="RWF-kI-q4v">
             <objects>
-                <viewController id="cPS-IE-utG" customClass="NewLocationMapViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewLocationMapViewController" id="cPS-IE-utG" customClass="NewLocationMapViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cCO-SI-0SO"/>
                         <viewControllerLayoutGuide type="bottom" id="fSc-B8-eJ9"/>
@@ -323,7 +314,7 @@
                                     </barButtonItem>
                                     <barButtonItem systemItem="add" id="cc4-AQ-1aa">
                                         <connections>
-                                            <segue destination="RkL-mD-cNi" kind="show" id="JFm-oT-Ykq"/>
+                                            <segue destination="1lS-vz-W1M" kind="show" id="BdY-aT-w4I"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -378,7 +369,23 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Blo-mg-l3j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1337" y="138"/>
+            <point key="canvasLocation" x="1701" y="137"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BUE-3q-X85">
+            <objects>
+                <navigationController id="JvI-Zx-bG9" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="828-IZ-iRf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="n9n-rz-gqJ" kind="relationship" relationship="rootViewController" id="4vQ-l5-wdK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="50j-w7-P4c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="639" y="136"/>
         </scene>
     </scenes>
     <resources>
@@ -388,6 +395,6 @@
         <image name="table_30x30" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AYj-No-A38"/>
+        <segue reference="zXf-NY-WAi"/>
     </inferredMetricsTieBreakers>
 </document>

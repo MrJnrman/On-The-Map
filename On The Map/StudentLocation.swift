@@ -67,4 +67,17 @@ struct StudentLocation {
     func getName() -> String {
         return "\(self.firstName!) \(self.lastName!)"
     }
+    
+    func buildJSONBody(mediaURL: String, lat: Double, long: Double) -> String{
+        var jsonBody = HttpBody.LocationBody
+        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.uniqueKey, with: Account.shared.userId!)
+        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.LastName, with: Account.shared.lastName!)
+        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.FirstName, with: Account.shared.firstName!)
+        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.MapString, with: "")
+        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.Latitude, with: "\(lat)")
+        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.Longitude, with: "\(long)")
+        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.MediaURL, with: mediaURL)
+        
+        return jsonBody
+    }
 }

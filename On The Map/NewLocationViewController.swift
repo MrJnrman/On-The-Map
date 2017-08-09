@@ -12,13 +12,22 @@ class NewLocationViewController: UIViewController {
 
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var websiteTextField: UITextField!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
     
     @IBAction func findLocationPressed(_ sender: Any) {
+        let newPinVC = self.storyboard?.instantiateViewController(withIdentifier: "NewLocationMapViewController") as! NewLocationMapViewController
         
+        newPinVC.location = locationTextField.text
+        newPinVC.website = websiteTextField.text
+        
+        self.navigationController?.pushViewController(newPinVC, animated: true)
     }
+    
+    @IBAction func cancelPressed(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
 }
