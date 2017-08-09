@@ -45,6 +45,7 @@ struct HTTPMethods {
 
 struct HttpBody {
     static let AuthorizationBody = "{\"udacity\": {\"username\": \"<user-name>\", \"password\": \"<password>\"}}"
+    static let LocationBody = "{\"uniqueKey\": \"<unique-key>\", \"firstName\": \"<first-name>\", \"lastName\": \"<last-name>\",\"mapString\": \"<map-string>\", \"mediaURL\": \"<media-url>\",\"latitude\": <lat-coordinate>, \"longitude\": <long-coordinate>}"
 }
 
 struct AlertViewConstants {
@@ -68,6 +69,18 @@ struct JSONResponseKeys {
     static let FirstName = "first_name"
     static let LastName = "last_name"
     static let User = "user"
+}
+
+struct JSONBodyValue {
+    static let Username = "<user-name>"
+    static let Password = "<password>"
+    static let uniqueKey = "<unique-key>"
+    static let LastName = "<last-name>"
+    static let FirstName = "<first-name>"
+    static let MapString = "<map-string>"
+    static let MediaURL = "<media-url>"
+    static let Latitude = "<lat-coordinate>"
+    static let Longitude = "<long-coordinate>"
 }
 
 struct ParameterKeys {

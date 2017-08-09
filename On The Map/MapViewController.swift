@@ -93,22 +93,56 @@ class MapViewController: UIViewController {
         
         showPinDropAlert() { (websiteURL) in
             
-            // TODO: Update the parse api with new pin info
-            performUIUpdatesOnMain {
-                
-                guard let websiteURL = websiteURL else {
-                    return
-                }
-                
-                self.annotation.coordinate = locationCoordinates
-                self.annotation.title = Account.shared.username
-                self.annotation.subtitle = websiteURL
-                
-                self.mapView.addAnnotation(self.annotation)
+            guard let websiteURL = websiteURL else {
+                return
             }
+            
+            self.postNewLocation(mediaURL: websiteURL, lat: Double(locationCoordinates.latitude), long: Double(locationCoordinates.longitude)) { (success) in
+                
+                performUIUpdatesOnMain {
+                    
+                    if success {
+                        self.annotation.coordinate = locationCoordinates
+                        self.annotation.title = Account.shared.getFullName()
+                        self.annotation.subtitle = websiteURL
+                        
+                        self.mapView.addAnnotation(self.annotation)
+                    }
+                    
+                }
+            }
+            
+            // TODO: Update the parse api with new pin info
+            
         }
         
         
+    }
+    
+    func buildJSONBody(mediaURL: String, lat: Double, long: Double) -> String{
+        var jsonBody = HttpBody.LocationBody
+        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.uniqueKey, with: Account.shared.userId!)
+        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.LastName, with: Account.shared.lastName!)
+        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.FirstName, with: Account.shared.firstName!)
+        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.MapString, with: "")
+        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.Latitude, with: "\(lat)")
+        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.Longitude, with: "\(long)")
+        jsonBody = jsonBody.replacingOccurrences(of: JSONBodyValue.MediaURL, with: mediaURL)
+        
+        return jsonBody
+    }
+    
+    func postNewLocation(mediaURL: String, lat: Double, long: Double, completionHandler: @escaping (_ success: Bool) -> Void ) {
+        
+        let jsonBody = buildJSONBody(mediaURL: mediaURL, lat: lat, long: long)
+        let _ = HttpManager.shared.taskForPOSTRequest(Methods.ParseStudentLocation, parameters: nil, api: .parse, jsonBody: jsonBody) { (results,error) in
+            
+            if error == nil {
+                 completionHandler(true)
+            } else {
+                completionHandler(false)
+            }
+        }
     }
     
     func showPinDropAlert(completionHandler: @escaping (_ website: String?) -> Void) {

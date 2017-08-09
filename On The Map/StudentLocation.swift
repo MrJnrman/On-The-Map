@@ -16,6 +16,8 @@ struct StudentLocation {
     var mediaURL: String!
     var latitude: Double!
     var longitude: Double!
+    var mapString: String?
+    var uniqueKey: String!
     var studentLocations = [StudentLocation]()
     
     init() {
@@ -28,6 +30,8 @@ struct StudentLocation {
         self.mediaURL = results["mediaURL"] as! String
         self.latitude = results["latitude"] as! Double
         self.longitude = results["longitude"] as! Double
+        self.uniqueKey = results["uniqueKey"] as! String
+        self.mapString = results["mapString"] as? String
         
     }
     
@@ -44,6 +48,10 @@ struct StudentLocation {
             }
             
             guard (dictionary["mediaURL"] as? String) != nil else{
+                continue
+            }
+            
+            guard let _ = dictionary["uniqueKey"] as? String else {
                 continue
             }
             

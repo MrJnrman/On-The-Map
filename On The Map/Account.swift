@@ -13,5 +13,10 @@ struct Account {
     
     var sessionID: String?
     var userId: String?
-    var username: String?
+    var firstName: String?
+    var lastName: String?
+    
+    func getFullName() -> String {
+        return "\(firstName!) \(lastName!)"
+    }
 }

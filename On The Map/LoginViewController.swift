@@ -65,9 +65,9 @@ class LoginViewController: UIViewController {
                 }
             } else {
                 if self.getLoginData(results!) {
-                    self.getPublicData(Account.shared.userId!) { (username) in
+                    self.getPublicData(Account.shared.userId!) { (firstName, lastName) in
                         performUIUpdatesOnMain {
-                            guard (username != nil) else {
+                            guard (firstName != nil) else {
                                 self.hideActivityIndicator()
                                 self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.Request403, buttonText: AlertViewConstants.TryAgain)
                                 return
@@ -76,7 +76,8 @@ class LoginViewController: UIViewController {
                             self.hideActivityIndicator()
                             
                             // add username to Account struct and transition to enxt view
-                            Account.shared.username = username
+                            Account.shared.firstName = firstName
+                            Account.shared.lastName = lastName
                             self.performSegue(withIdentifier: "LoginSegue", sender: nil)
                         }
                     }
@@ -125,27 +126,27 @@ class LoginViewController: UIViewController {
         return success
     }
     
-    func getPublicData(_ accountId: String, completionHandler: @escaping (_ username: String?) -> Void) {
+    func getPublicData(_ accountId: String, completionHandler: @escaping (_ firstName: String?,_ lastName: String?) -> Void) {
         
         let method = Methods.UdacityUser.replacingOccurrences(of: "<user_id>", with: accountId)
         
         _ = HttpManager.shared.taskForGETRequest(method, parameters: nil, api: .udacity) { (results,error) in
 //            print(results)
             guard let user = results?[JSONResponseKeys.User] as? [String:AnyObject] else {
-                completionHandler(nil)
+                completionHandler(nil, nil)
                 return
             }
             guard let firstName = user[JSONResponseKeys.FirstName] as? String else {
-                completionHandler(nil)
+                completionHandler(nil, nil)
                 return
             }
             
             guard let lastName = user[JSONResponseKeys.LastName] as? String else {
-                completionHandler(nil)
+                completionHandler(nil, nil)
                 return
             }
             
-            completionHandler("\(firstName) \(lastName)")
+            completionHandler(firstName, lastName)
         }
     }
 }
