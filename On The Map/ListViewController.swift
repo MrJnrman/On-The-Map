@@ -12,8 +12,6 @@ class ListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,22 +46,24 @@ class ListViewController: UIViewController {
 
 extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appDelegate.studentLocations.count
+        return StudentDataSource.sharedInstance.studentData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentCell") as! StudentTableViewCell
         cell.imageView?.image = UIImage(named: "userPin")
-        cell.textLabel?.text = appDelegate.studentLocations[indexPath.row].getName()
-        cell.detailTextLabel?.text = appDelegate.studentLocations[indexPath.row].mediaURL
+        cell.textLabel?.text = StudentDataSource.sharedInstance.studentData[indexPath.row].getName()
+        cell.detailTextLabel?.text = StudentDataSource.sharedInstance.studentData[indexPath.row].mediaURL
         return cell
     }
 }
 
 extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         let app = UIApplication.shared
-        if let toOpen = appDelegate.studentLocations[indexPath.row].mediaURL {
+        if let toOpen = StudentDataSource.sharedInstance.studentData[indexPath.row].mediaURL {
             guard let url = URL(string: toOpen) else {
                 showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.InvalidURL, buttonText: AlertViewConstants.Dismiss)
                 return

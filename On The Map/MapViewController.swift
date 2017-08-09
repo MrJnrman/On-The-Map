@@ -70,6 +70,8 @@ class MapViewController: UIViewController {
             performUIUpdatesOnMain {
                 self.hideActivityIndicator()
                 if error == nil {
+                    let annotations = self.mapView.annotations
+                    self.mapView.removeAnnotations(annotations)
                     self.loadMap(results!)
                 } else {
                     self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.MapError, buttonText: AlertViewConstants.PinCancel)
@@ -100,8 +102,7 @@ class MapViewController: UIViewController {
     }
     
     func updateAppDelegateList(studentLocations: [StudentLocation]) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.studentLocations = studentLocations
+        StudentDataSource.sharedInstance.studentData = studentLocations
     }
     
     @IBAction func dropPin(_ sender: UILongPressGestureRecognizer) {
