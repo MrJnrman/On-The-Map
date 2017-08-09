@@ -63,10 +63,19 @@ class MapViewController: UIViewController {
                 if error == nil {
                     self.loadMap(results!)
                 } else {
-                    print("error")
+                    self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.MapError, buttonText: AlertViewConstants.PinCancel)
                 }
             }
         }
+    }
+    
+    func showAlertView(title: String, message: String, buttonText: String) {
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: buttonText, style: .destructive, handler: nil)
+        alertController.addAction(action)
+        
     }
     
     func loadMap(_ results: AnyObject) {

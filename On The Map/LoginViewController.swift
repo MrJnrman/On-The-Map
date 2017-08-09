@@ -131,7 +131,6 @@ class LoginViewController: UIViewController {
         let method = Methods.UdacityUser.replacingOccurrences(of: "<user_id>", with: accountId)
         
         _ = HttpManager.shared.taskForGETRequest(method, parameters: nil, api: .udacity) { (results,error) in
-//            print(results)
             guard let user = results?[JSONResponseKeys.User] as? [String:AnyObject] else {
                 completionHandler(nil, nil)
                 return

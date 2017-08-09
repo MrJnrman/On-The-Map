@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -137,7 +138,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="eXS-1R-J3Y"/>
                                     <barButtonItem systemItem="add" id="mMQ-6k-O3F">
                                         <connections>
-                                            <segue destination="1lS-vz-W1M" kind="show" id="bYd-Ai-FQm"/>
+                                            <segue destination="RkL-mD-cNi" kind="show" id="AYj-No-A38"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -163,10 +164,26 @@
             </objects>
             <point key="canvasLocation" x="2826" y="467"/>
         </scene>
-        <!--View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="hwb-jg-EeX">
+            <objects>
+                <navigationController id="RkL-mD-cNi" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ntV-5D-4Z0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="1lS-vz-W1M" kind="relationship" relationship="rootViewController" id="nfe-aN-TeO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2d1-So-dSp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4401" y="138"/>
+        </scene>
+        <!--New Location View Controller-->
         <scene sceneID="x6C-pT-dbE">
             <objects>
-                <viewController id="1lS-vz-W1M" sceneMemberID="viewController">
+                <viewController id="1lS-vz-W1M" customClass="NewLocationViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Jjm-Ux-GRe"/>
                         <viewControllerLayoutGuide type="bottom" id="6ro-6U-EJ2"/>
@@ -221,10 +238,61 @@
                             <constraint firstItem="ClR-Pz-wAq" firstAttribute="leading" secondItem="EUl-xN-RYz" secondAttribute="leading" id="l5g-2g-56r"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="QrE-lW-INX"/>
+                    <connections>
+                        <outlet property="locationTextField" destination="CpU-Cd-jZf" id="834-2G-dM9"/>
+                        <outlet property="websiteTextField" destination="CV6-Jh-9VE" id="fh9-Pq-8MG"/>
+                        <segue destination="cPS-IE-utG" kind="show" identifier="NewPinSegue" id="KJP-qB-7iu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aZ9-z8-y6h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4050" y="138"/>
+            <point key="canvasLocation" x="5685" y="138"/>
+        </scene>
+        <!--New Location Map View Controller-->
+        <scene sceneID="RWF-kI-q4v">
+            <objects>
+                <viewController id="cPS-IE-utG" customClass="NewLocationMapViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cCO-SI-0SO"/>
+                        <viewControllerLayoutGuide type="bottom" id="fSc-B8-eJ9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VP4-Ku-OMp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SYk-Ox-G8P">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSp-gW-dhM" customClass="LoginUIButton" customModule="On_The_Map" customModuleProvider="target">
+                                <rect key="frame" x="43" y="481" width="234" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.51372549020000002" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="SUBMIT">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="submitPressed:" destination="cPS-IE-utG" eventType="touchUpInside" id="JUS-4J-BWD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="SYk-Ox-G8P" secondAttribute="trailing" id="Drt-SN-rKM"/>
+                            <constraint firstItem="SYk-Ox-G8P" firstAttribute="top" secondItem="VP4-Ku-OMp" secondAttribute="top" id="frI-FA-IXP"/>
+                            <constraint firstItem="BSp-gW-dhM" firstAttribute="centerX" secondItem="SYk-Ox-G8P" secondAttribute="centerX" id="nYW-U8-jL4"/>
+                            <constraint firstItem="fSc-B8-eJ9" firstAttribute="top" secondItem="BSp-gW-dhM" secondAttribute="bottom" constant="8" symbolic="YES" id="pfO-Hc-v1b"/>
+                            <constraint firstItem="BSp-gW-dhM" firstAttribute="leading" secondItem="VP4-Ku-OMp" secondAttribute="leadingMargin" constant="27" id="uED-em-mYo"/>
+                            <constraint firstItem="SYk-Ox-G8P" firstAttribute="leading" secondItem="VP4-Ku-OMp" secondAttribute="leading" id="xMl-NA-NFX"/>
+                            <constraint firstAttribute="bottom" secondItem="SYk-Ox-G8P" secondAttribute="bottom" id="yTo-IL-s8B"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="SYk-Ox-G8P" id="5YS-Bh-7He"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dmC-F7-Jfm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6841.875" y="137.32394366197184"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="DTR-FI-qV6">
@@ -255,7 +323,7 @@
                                     </barButtonItem>
                                     <barButtonItem systemItem="add" id="cc4-AQ-1aa">
                                         <connections>
-                                            <segue destination="1lS-vz-W1M" kind="show" id="gyl-6y-e4b"/>
+                                            <segue destination="RkL-mD-cNi" kind="show" id="JFm-oT-Ykq"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -320,6 +388,6 @@
         <image name="table_30x30" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gyl-6y-e4b"/>
+        <segue reference="AYj-No-A38"/>
     </inferredMetricsTieBreakers>
 </document>
