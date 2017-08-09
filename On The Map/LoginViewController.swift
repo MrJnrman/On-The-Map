@@ -14,6 +14,57 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        subscribeToKeyboardNotificaiton()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeFromKeyboardNotification()
+    }
+    
+    // Setup subscription to keybord events(show/hide)
+    func subscribeToKeyboardNotificaiton(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    // unsubscribe from keyboard events
+    func unsubscribeFromKeyboardNotification() {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    // offset view by the height of the keyboard
+    func keyboardWillShow(_ notification: Notification) {
+        
+        // check if view has already been repositioned
+        // check if top textfield is currently being edited
+        if view.frame.origin.y == 0 {
+            view.frame.origin.y = getKeyboardHeight(notification) * (-1)
+        }
+    }
+    
+    // return the position of the view to normal
+    func keyboardWillHide(_ notification: Notification) {
+        view.frame.origin.y = 0
+    }
+    
+    func getKeyboardHeight(_ notification:Notification) -> CGFloat {
+        
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.cgRectValue.height / 2
+    }
 
     @IBAction func loginButtonPressed(_ sender: Any) {
         login()
@@ -147,6 +198,13 @@ class LoginViewController: UIViewController {
             
             completionHandler(firstName, lastName)
         }
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 
