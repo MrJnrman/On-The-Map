@@ -97,13 +97,10 @@ class LoginViewController: UIViewController {
         
         let jsonBody = HttpManager.shared.buildAuthenticationHttpBody(username: emailTextField.text!, password: passwordTextField.text!)
         
-        print("HttpBody: \(jsonBody)" )
-        
         _ = HttpManager.shared.taskForPOSTRequest(UdacityConstants.SessionPath, parameters: nil, api: API.udacity, jsonBody: jsonBody) { (results,error) in
             
             if error != nil {
                 performUIUpdatesOnMain {
-                    print(error!.localizedDescription)
                     if error!.localizedDescription == ResponseCodes.BadCredentials {
                         self.hideActivityIndicator()
                         self.showAlertView(title: AlertViewConstants.Title, message: AlertViewConstants.Request403, buttonText:AlertViewConstants.TryAgain)
