@@ -68,3 +68,6 @@ fastlane/test_output
 
 # VSCODE
 .vscode
+
+# MAC Specific
+.DS_Store
